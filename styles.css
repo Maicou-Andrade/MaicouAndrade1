@@ -287,36 +287,48 @@ body {
 
 .image-container {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
 }
 
 .profile-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 0 4px rgba(59, 130, 246, 0.2),
+        0 0 0 8px rgba(59, 130, 246, 0.1);
     position: relative;
     z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 4px rgba(59, 130, 246, 0.4),
+        0 0 0 8px rgba(59, 130, 246, 0.2);
 }
 
 .image-glow {
     position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
     background: linear-gradient(135deg, #3B82F6, #60A5FA);
-    border-radius: 30px;
-    opacity: 0.3;
-    filter: blur(20px);
+    border-radius: 40px;
+    opacity: 0.4;
+    filter: blur(25px);
     animation: pulse 3s ease-in-out infinite;
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.05); }
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
 }
 
 .hero-scroll {
@@ -409,17 +421,30 @@ body {
 
 .stat-item {
     text-align: center;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    border: 1px solid rgba(59, 130, 246, 0.1);
+    padding: 2.5rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 20px;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3B82F6, #60A5FA);
 }
 
 .stat-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-8px);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.08));
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
 }
 
 .stat-icon {
@@ -716,13 +741,13 @@ body {
 }
 
 .service-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(59, 130, 246, 0.1);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.2);
     border-radius: 20px;
-    padding: 2rem;
-    transition: all 0.3s ease;
+    padding: 2.5rem;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .service-card::before {
@@ -733,15 +758,54 @@ body {
     right: 0;
     height: 4px;
     background: linear-gradient(90deg, #3B82F6, #60A5FA);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.service-card:hover::before {
-    transform: scaleX(1);
 }
 
 .service-card:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.08));
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+}
+
+.service-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #3B82F6, #60A5FA);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+}
+
+.service-icon img {
+    width: 35px;
+    height: 35px;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #3B82F6;
+    line-height: 1.3;
+}
+
+.service-card p {
+    color: #D1D5DB;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
     transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(59, 130, 246, 0.3);
@@ -882,7 +946,7 @@ body {
 
 .timeline-content {
     flex: 1;
-    background: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05));
     border: 1px solid rgba(59, 130, 246, 0.2);
     border-radius: 20px;
     padding: 2.5rem;
@@ -892,32 +956,46 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3B82F6, #60A5FA);
 }
 
 .timeline-content:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.08));
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
     border-color: rgba(59, 130, 246, 0.4);
 }
 
 .timeline-content h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #ffffff;
+    color: #3B82F6;
+    line-height: 1.3;
 }
 
 .timeline-content h4 {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.125rem;
+    font-weight: 600;
     color: #60A5FA;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .timeline-content p {
     color: #D1D5DB;
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .timeline-achievements {
@@ -956,66 +1034,100 @@ body {
 
 .contact-item {
     display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.contact-icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, #3B82F6, #60A5FA);
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.2);
     border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
+    color: inherit;
 }
 
-.contact-icon::before {
+.contact-item::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
-    border-radius: 16px;
+    height: 3px;
+    background: linear-gradient(90deg, #3B82F6, #60A5FA);
 }
 
-.contact-icon:hover {
+.contact-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.08));
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+    cursor: pointer;
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #3B82F6, #60A5FA);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
 .contact-icon img {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     filter: brightness(0) invert(1);
     object-fit: contain;
-    z-index: 1;
-    position: relative;
+}
+
+.whatsapp-icon {
+    background: linear-gradient(135deg, #3B82F6, #60A5FA) !important;
+}
+
+.whatsapp-icon svg {
+    color: white;
 }
 
 .contact-details h4 {
     font-size: 1.125rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: #ffffff;
+    margin-bottom: 0.5rem;
+    color: #3B82F6;
 }
 
 .contact-details p {
     color: #D1D5DB;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .contact-form {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(59, 130, 246, 0.1);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.2);
     border-radius: 20px;
-    padding: 2rem;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3B82F6, #60A5FA);
 }
 
 .form-group {

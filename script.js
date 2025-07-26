@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Custom smooth scrolling function with easing
-    function smoothScrollTo(target, duration = 1200, extraOffset = 0) {
+    function smoothScrollTo(target, duration = 2000, extraOffset = 0) {
         let targetElement;
         let targetPosition;
         
@@ -38,16 +38,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const distance = targetPosition - startPosition;
         let startTime = null;
 
-        // Easing function for professional smooth animation
-        function easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+        // Easing function for professional smooth animation - mais suave
+        function easeInOutQuart(t) {
+            return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * (--t) * t * t * t;
         }
 
         function animation(currentTime) {
             if (startTime === null) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
             const progress = Math.min(timeElapsed / duration, 1);
-            const ease = easeInOutCubic(progress);
+            const ease = easeInOutQuart(progress);
             
             window.scrollTo(0, startPosition + distance * ease);
             
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (logo) {
         logo.addEventListener('click', function(e) {
             e.preventDefault();
-            smoothScrollTo('top', 1000);
+            smoothScrollTo('top', 1800);
         });
         
         // Make logo clickable
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const target = this.getAttribute('href');
             // Adiciona 20% mais de scroll (aproximadamente 100px)
-            smoothScrollTo(target, 1200, -100);
+            smoothScrollTo(target, 2200, -100);
             
             // Close mobile menu if open
             hamburger.classList.remove('active');
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.closest('.hero-scroll') || e.target.closest('.scroll-indicator')) {
             e.preventDefault();
             console.log('Setinha clicada!'); // Para debug
-            smoothScrollTo('.stats', 1500, -50);
+            smoothScrollTo('.stats', 2500, -50);
         }
     });
 

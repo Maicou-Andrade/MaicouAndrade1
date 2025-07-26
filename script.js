@@ -422,7 +422,7 @@ document.head.appendChild(styleSheet);
 
 // BI Carousel Functionality
 let currentSlideIndex = 0;
-const totalSlides = 5;
+const totalSlides = 4;
 
 function showSlide(index) {
     const slides = document.querySelector('.carousel-slides');
@@ -436,7 +436,7 @@ function showSlide(index) {
     else currentSlideIndex = index;
     
     // Move slides
-    const translateX = -currentSlideIndex * 20; // 20% per slide (100% / 5 slides)
+    const translateX = -currentSlideIndex * 25; // 25% per slide (100% / 4 slides)
     slides.style.transform = `translateX(${translateX}%)`;
     
     // Update indicators

@@ -20,26 +20,113 @@ document.addEventListener('DOMContentLoaded', function() {
         navMenu.classList.toggle('active');
     });
 
+    // Custom smooth scrolling function with easing
+    function smoothScrollTo(target, duration = 1200, extraOffset = 0) {
+        let targetElement;
+        let targetPosition;
+        
+        if (target === 'top') {
+            targetPosition = 0;
+        } else {
+            targetElement = typeof target === 'string' ? document.querySelector(target) : target;
+            if (!targetElement) return;
+            const headerHeight = header.offsetHeight;
+            targetPosition = targetElement.offsetTop - headerHeight - extraOffset;
+        }
+        
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        // Easing function for professional smooth animation
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+        }
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            const ease = easeInOutCubic(progress);
+            
+            window.scrollTo(0, startPosition + distance * ease);
+            
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        }
+
+        requestAnimationFrame(animation);
+    }
+
+    // Logo click to scroll to top
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothScrollTo('top', 1000);
+        });
+        
+        // Make logo clickable
+        logo.style.cursor = 'pointer';
+    }
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = header.offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
+            const target = this.getAttribute('href');
+            // Adiciona 20% mais de scroll (aproximadamente 100px)
+            smoothScrollTo(target, 1200, -100);
+            
+            // Close mobile menu if open
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
         });
     });
+
+    // Scroll indicator functionality - CORRIGINDO DEFINITIVAMENTE
+    document.addEventListener('click', function(e) {
+        // Verifica se o clique foi na setinha ou em qualquer elemento dentro dela
+        if (e.target.closest('.hero-scroll') || e.target.closest('.scroll-indicator')) {
+            e.preventDefault();
+            console.log('Setinha clicada!'); // Para debug
+            smoothScrollTo('.stats', 1500, -50);
+        }
+    });
+
+    // Hide scroll indicator when user scrolls down
+    const heroScroll = document.querySelector('.hero-scroll');
+    if (heroScroll) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            // Fade out and move up when scrolling
+            if (scrolled > 100) {
+                heroScroll.style.opacity = '0';
+                heroScroll.style.transform = `translateX(-50%) translateY(${rate}px)`;
+                heroScroll.style.pointerEvents = 'none';
+            } else {
+                heroScroll.style.opacity = '0.8';
+                heroScroll.style.transform = 'translateX(-50%) translateY(0)';
+                heroScroll.style.pointerEvents = 'auto';
+            }
+        });
+        
+        // Add magnetic effect on mouse move
+        heroScroll.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            this.style.transform = `translateX(-50%) translate(${x * 0.1}px, ${y * 0.1}px)`;
+        });
+        
+        heroScroll.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(-50%) translateY(0)';
+        });
+    }
 
     // Animated counter for stats
     const observerOptions = {

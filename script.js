@@ -418,3 +418,78 @@ const styleSheet = document.createElement('style');
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
 
+
+
+// BI Carousel Functionality
+let currentSlideIndex = 0;
+const totalSlides = 5;
+
+function showSlide(index) {
+    const slides = document.querySelector('.carousel-slides');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    if (!slides) return;
+    
+    // Ensure index is within bounds
+    if (index >= totalSlides) currentSlideIndex = 0;
+    else if (index < 0) currentSlideIndex = totalSlides - 1;
+    else currentSlideIndex = index;
+    
+    // Move slides
+    const translateX = -currentSlideIndex * 20; // 20% per slide (100% / 5 slides)
+    slides.style.transform = `translateX(${translateX}%)`;
+    
+    // Update indicators
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === currentSlideIndex);
+    });
+}
+
+function changeSlide(direction) {
+    showSlide(currentSlideIndex + direction);
+}
+
+function currentSlide(index) {
+    showSlide(index - 1); // Convert to 0-based index
+}
+
+// Auto-play carousel
+function startCarouselAutoPlay() {
+    setInterval(() => {
+        changeSlide(1);
+    }, 5000); // Change slide every 5 seconds
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Start auto-play after a short delay
+    setTimeout(startCarouselAutoPlay, 2000);
+    
+    // Initialize first slide
+    showSlide(0);
+});
+
+// Pause auto-play on hover
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.bi-carousel');
+    let autoPlayInterval;
+    
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+    
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+        
+        // Start auto-play initially
+        setTimeout(startAutoPlay, 2000);
+    }
+});
+

@@ -609,6 +609,100 @@ body {
     font-size: 0.875rem;
 }
 
+/* Technical Section */
+.about-technical {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.05));
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-technical::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10B981, #22C55E);
+}
+
+.technical-highlight h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #10B981;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.technical-intro {
+    font-size: 1.125rem;
+    color: #E5E7EB;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.technical-services {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.technical-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.technical-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: translateX(5px);
+}
+
+.technical-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #10B981, #22C55E);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s ease;
+}
+
+.technical-item:hover .technical-icon {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.technical-content h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #10B981;
+    line-height: 1.4;
+}
+
+.technical-content p {
+    color: #D1D5DB;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
 /* Services Section */
 .services {
     padding: 6rem 0;
@@ -1286,6 +1380,75 @@ body {
     .carousel-btn svg {
         width: 16px;
         height: 16px;
+    }
+}
+
+
+/* Responsive Design for Technical Section */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .about-technical {
+        padding: 1.5rem;
+    }
+    
+    .technical-highlight h3 {
+        font-size: 1.5rem;
+    }
+    
+    .technical-intro {
+        font-size: 1rem;
+    }
+    
+    .technical-item {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .technical-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        margin: 0 auto 1rem;
+    }
+    
+    .technical-content h4 {
+        font-size: 1rem;
+    }
+    
+    .technical-content p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .technical-highlight h3 {
+        font-size: 1.25rem;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .technical-intro {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .technical-services {
+        gap: 1rem;
+    }
+    
+    .technical-item {
+        padding: 0.75rem;
+    }
+    
+    .technical-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
     }
 }
 
